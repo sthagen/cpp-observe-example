@@ -3,7 +3,7 @@
 
 #include <observe/event.h>
 
-void example() {
+int main() {
   // events can be valueless
   observe::Event<> eventA;
 
