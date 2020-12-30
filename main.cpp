@@ -9,8 +9,10 @@ int main() {
 
   // or have arguments
   observe::Event<std::string, float> eventB;
-  
-  // connect will always trigger when an event is triggered
+
+  observe::Event<int> eventC;
+
+    // connect will always trigger when an event is triggered
   eventA.connect([](){
     std::cout << "A triggered" << std::endl;
   });
@@ -26,8 +28,13 @@ int main() {
 
   // `observe::Observer` can store any type of observer
   // previous observers will be removed
-  observer.observe(eventA, [](){ std::cout << "I am now observing A" << std::endl; });
+  observer.observe(eventC, [](int count){ std::cout << "I witness C with " << count << std::endl; });
+  eventC.emit(123);
+  eventC.emit(234);
+  eventC.emit(1);
+  eventC.emit(2);
+  eventC.emit(42);
 
-  // to remove an observer without destroying the object, call reset
+    // to remove an observer without destroying the object, call reset
   observer.reset();
 }
